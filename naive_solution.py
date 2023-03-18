@@ -13,7 +13,7 @@ def verify(A: list[int], classes ):
     return max(F) - min(F) <= 1
 
 #O(n!)
-def _solution(A: list[int],k: int,current_sol: list[int],classes: int):
+def _solution_old(A: list[int],k: int,current_sol: list[int],classes: int):
 
     max_length = 0 
 
@@ -27,9 +27,26 @@ def _solution(A: list[int],k: int,current_sol: list[int],classes: int):
 
     return max_length 
 
+#
+def _solution(A: list[int],k: int, posible_solution: list[int], classes: int):
+    if k == len(A):
+        return len(posible_solution) if verify(posible_solution, classes) else 0
 
-def solution(A: list[int],CLASSES=3) -> int:
-    return _solution(A, 0,[], CLASSES ) 
+    value_not_set = _solution(A,k+1,posible_solution,classes)
+
+    posible_solution.append(A[k]) 
+    value_set =_solution(A,k+1,posible_solution,classes)
+    posible_solution.pop()
+
+    return max(value_not_set,value_set)
+
+def solution(A, classes):
+    return _solution(A, 0, [], classes) 
+
+    
+
+def solution_old(A: list[int],CLASSES=3) -> int:
+    return _solution_old(A, 0,[], CLASSES ) 
 
 
 if __name__ == '__main__':
@@ -37,5 +54,5 @@ if __name__ == '__main__':
         
     arr=gen_random_case(20,8)
     print(arr)
-    print(solution(arr,8))
+    print(solution_2(arr,8))
 
