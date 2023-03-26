@@ -27,7 +27,7 @@ def _solution_old(A: list[int],k: int,current_sol: list[int],classes: int):
 
     return max_length 
 
-#
+#O(2^n)
 def _solution(A: list[int],k: int, posible_solution: list[int], classes: int):
     if k == len(A):
         return len(posible_solution) if verify(posible_solution, classes) else 0
@@ -54,5 +54,5 @@ if __name__ == '__main__':
         
     arr=gen_random_case(20,8)
     print(arr)
-    print(solution_2(arr,8))
+    print(solution(arr,8))
 
