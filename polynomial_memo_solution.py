@@ -62,8 +62,6 @@ def solution( A: list[int], class_count=3):
     k= len(A) // class_count +1
     better_solution = 0
     matrices= get_matrices(A,class_count)
-    #k = min(min([ x[len(x)-1] for x in matrices[1]])+1,
-    #  max([ x[len(x)-1] for x in matrices[1]]))
 
     while k > 0:
         for p in permutations(class_count):
@@ -74,9 +72,9 @@ def solution( A: list[int], class_count=3):
 
 
 if __name__ =='__main__':
-    #A= [1,2,3,4,1,2,3,4]
-    import tester
-    A = tester.gen_random_case(300,8) 
-    print(solution(A,8))
+    A= [1,2,3,4,1,2,3,4]
+    #import tester
+    #A = tester.gen_random_case(300,8) 
+    print(solution(A,4))
     #print(get_position_matrix(A,4))
 
