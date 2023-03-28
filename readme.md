@@ -24,8 +24,18 @@ Dado que estamos construyendo todas las subsecuencias, la subsecuencia con el ma
 
 
 ----
-## Solucion O($n$) con muy alta constante 
-    TODO
+## Solución 
+Dada la cadena A, vamos a asumir que es una subsecuencia valida, por tanto se cumplirá que $\forall i,j$ entre 1 y 8, $| |C_i| - |C_j| | \le 1$ siendo $C_i, C_j$ todas las posibles clases.
+
+La mayor cardinalidad posible de cualquiera de los conjuntos de elementos de una misma clase pertenecientes a la subsecuencia solución T tiene que ser $k=\frac{|A|}{8}+1$ por lo que   empezaremos asumiendo que en $T$ las clases $C_i$ asociadas a este cumplen que $k-1\le|C_i|\le k$.
+
+Entonces vamos a ver si para una cardinalidad $k$ (empezando por la mayor posible $k$) se cumple que existe una subsecuencia $T$ válida. De no existir reducimos el valor de $k$ y probamos si existe una subsecuencia para el nuevo valor tal que que cumpla las restricciones. Esto lo vamos a hacer varias veces hasta que para un $k$ se cumpla que existe $T$ válida. Luego terminamos el algoritmo y retornamos el tamaño de T que será maximo. 
+
+
+TODO: ALGORITMO PARA ENCONTRAR EL K VALIDO!
+
+Vamos a iterar por todas las permutaciones de posibles ordenes en los que pueden aparecer las clases en la subsecuencia solucion T, por cada uno de los posibles ordenes, vamos a tratar de construir T (asumiendo que se cumple  $| |C_i| - |C_j| | \le 1$), si $\forall i, |C_i|$
+
 
 ### Correctitud
     TODO

@@ -59,27 +59,38 @@ def calc(A,matrices,perm,init_pos,k):
 
 
 def solution( A: list[int], class_count=3):
-    k= len(A) // class_count +1
+    
     better_solution = 0
     matrices= get_matrices(A,class_count)
-
-    while k > 0:
+    #bottom,top  = 1,(len(A) // class_count +1)
+    bottom,top  = 1,min(matrices[1][len(A)-1])+2
+    while bottom<=top:
+        middle= (bottom+top) // 2
         is_someone_valid = False
         for p in permutations(class_count):
-            sol,was_valid=calc(A,matrices,p,0,k)
+            sol,was_valid=calc(A,matrices,p,0,middle)
             is_someone_valid |=  was_valid
             better_solution = max(sol,better_solution) if was_valid else better_solution
         if is_someone_valid:
-            break
-
-        k-=1
+            bottom = middle+1
+            top = top
+        else:
+            bottom =bottom 
+            top =middle-1
+ 
     return better_solution
 
 
 if __name__ =='__main__':
-    A= [1,2,3,4,1,2,3,4]
-    #import tester
-    #A = tester.gen_random_case(300,8) 
-    print(solution(A,4))
+    #A= [1,2,3,4,1,2,3,4]
+    #A = [2,2,5,1,2,5,5,3,3,3,4,4,4,6,6,6,6,8,8,8,8,1,2]
+    import tester, time
+
+
+    A = tester.gen_random_case(100000,8) 
+    start_time = time.time()
+    print(solution(A,8))
+    current_time = time.time() - start_time
+    print(f"time:{current_time:.5f}")
     #print(get_position_matrix(A,4))
 
