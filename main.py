@@ -10,7 +10,7 @@ def compare_and_print(solver, solver_to_eval, cases=10, classes=8, size=10):
     success_count = 0
     time_ = 0
     max_time_ = 0
-    min_time_ = 0
+    min_time_ = 1e9 
     for i,(arr, sol) in enumerate(gen_cases(
             solver,
             cases=cases,

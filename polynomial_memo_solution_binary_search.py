@@ -64,33 +64,48 @@ def solution( A: list[int], class_count=3):
     matrices= get_matrices(A,class_count)
     #bottom,top  = 1,(len(A) // class_count +1)
     bottom,top  = 1,min(matrices[1][len(A)-1])+2
+
+    perms= list(permutations(class_count))
     while bottom<=top:
         middle= (bottom+top) // 2
         is_someone_valid = False
-        for p in permutations(class_count):
-            sol,was_valid=calc(A,matrices,p,0,middle)
+        new_perms = []
+
+        for perm in perms:
+            sol,was_valid=calc(A,matrices,perm,0,middle)
             is_someone_valid |=  was_valid
             better_solution = max(sol,better_solution) if was_valid else better_solution
+            if was_valid:
+                new_perms.append(perm)
+
         if is_someone_valid:
             bottom = middle+1
             top = top
+            perms = new_perms
         else:
             bottom =bottom 
             top =middle-1
- 
+    
     return better_solution
 
 
 if __name__ =='__main__':
-    #A= [1,2,3,4,1,2,3,4]
-    #A = [2,2,5,1,2,5,5,3,3,3,4,4,4,6,6,6,6,8,8,8,8,1,2]
     import tester, time
 
 
-    A = tester.gen_random_case(100000,8) 
+    A = tester.gen_random_case(10_000,8) 
+   # with open('raulito.txt','w') as fd:
+   #     fd.write(",".join(map(lambda x: str(x-1),A)))
     start_time = time.time()
-    print(solution(A,8))
+
+    sol = solution(A,8)
+    print("solution",sol)
     current_time = time.time() - start_time
     print(f"time:{current_time:.5f}")
+        
+   #    fd.write(f'\nsolution:{sol}')
+   #    fd.write(f'\ntime:{current_time}')
+   #    fd.write(f'\nlast_k:{last_k}')
+
     #print(get_position_matrix(A,4))
 
