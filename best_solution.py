@@ -19,7 +19,7 @@ def get_matrices(A: list[int], class_count):
 
     return mat, quantity_mat
 
-def calc(A,matrices,perm,init_pos,k):
+def calc(A,matrices,perm,init_pos,k, is_last_one):
     positional_matrix, quantity_matrix = matrices
 
     if len(perm)==0:
@@ -39,13 +39,13 @@ def calc(A,matrices,perm,init_pos,k):
     #caso k
     if values_before + k <= len(positional_matrix[current_class-1]) :
         index_k = positional_matrix[current_class-1][values_before+k-1]   
-        res1, is_valid1 = calc(A,matrices,perm[1:],index_k,k)
+        res1, is_valid1 = calc(A,matrices,perm[1:],index_k,k, is_last_one)
 
     #caso k-1
-    if values_before+k>1 and\
+    if is_last_one and values_before+k>1 and\
           values_before + k-1 <= len(positional_matrix[current_class-1]) :
         index_k_1 = positional_matrix[current_class-1][values_before+k-1-1]   
-        res2, is_valid2 = calc(A,matrices,perm[1:],index_k_1,k)
+        res2, is_valid2 = calc(A,matrices,perm[1:],index_k_1,k, is_last_one)
 
 
     if is_valid1 and is_valid2:
@@ -72,7 +72,17 @@ def solution( A: list[int], class_count=3):
         new_perms = []
 
         for perm in perms:
-            sol,was_valid=calc(A,matrices,perm,0,middle)
+            if bottom!=top:
+                sol,was_valid=calc(A,matrices,perm,0,middle, False )
+            else:
+                # si ya es la ultima k, la respuesta debe estar ahi
+                sol=max(
+                    calc(A,matrices,perm,0,middle+1, True )[0],
+                    calc(A,matrices,perm,0,middle, True )[0]
+                )
+                was_valid=True
+
+
             is_someone_valid |=  was_valid
             better_solution = max(sol,better_solution) if was_valid else better_solution
             if was_valid:
@@ -93,7 +103,7 @@ if __name__ =='__main__':
     import tester, time
 
 
-    A = tester.gen_random_case(10_000,8) 
+    A = tester.gen_random_case(10_000_000,8) 
    # with open('raulito.txt','w') as fd:
    #     fd.write(",".join(map(lambda x: str(x-1),A)))
     start_time = time.time()

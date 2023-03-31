@@ -1,7 +1,7 @@
 import colorama
 
 from tester import gen_cases
-import naive_solution, polynomial_solution, polynomial_memo_solution, polynomial_memo_solution_binary_search
+import naive_solution, polynomial_solution, polynomial_memo_solution,best_solution 
 
 import time
 
@@ -36,12 +36,12 @@ def compare_and_print(solver, solver_to_eval, cases=10, classes=8, size=10):
 if __name__ == '__main__':
     TOTAL_CASES =1000
     CLASSES = 8 
-    SIZE = 15 
+    SIZE = 16 
 
     compare_and_print(
         naive_solution.solution,
         #polynomial_memo_solution.solution,
-        polynomial_memo_solution_binary_search.solution,
+        best_solution.solution,
         cases=TOTAL_CASES,
         classes=CLASSES,#i,
         size=SIZE
