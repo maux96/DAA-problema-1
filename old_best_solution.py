@@ -19,45 +19,33 @@ def get_matrices(A: list[int], class_count):
 
     return mat, quantity_mat
 
-def exist_solution(A, matrices, order,k):
-    positional_matrix, quantity_matrix = matrices
-
-    last_index = 0
-    for current_class in order: 
-        values_before=quantity_matrix[last_index][current_class-1]
-        
-        if values_before + k > len(positional_matrix[current_class-1]) :
-            return False
-
-        last_index = positional_matrix[current_class-1][values_before+k-1]   
-
-    return True
-
-def calc(A,matrices,perm,init_pos,k):
+def calc(A,matrices,perm,init_pos,k, is_last_one):
     positional_matrix, quantity_matrix = matrices
 
     if len(perm)==0:
         return 0, True
 
     current_class = perm[0] 
-    if (k==1 and len(positional_matrix[current_class-1])==0):
-        return 0, True
 
     res1, is_valid1 = 0,False
     res2, is_valid2 = 0,False
 
     values_before=quantity_matrix[init_pos][current_class-1]
 
+
+    if k==1 and len(positional_matrix[current_class-1])==0:
+        return 0, True
+
     #caso k
     if values_before + k <= len(positional_matrix[current_class-1]) :
         index_k = positional_matrix[current_class-1][values_before+k-1]   
-        res1, is_valid1 = calc(A,matrices,perm[1:],index_k,k)
+        res1, is_valid1 = calc(A,matrices,perm[1:],index_k,k, is_last_one)
 
     #caso k-1
-    if values_before+k>1 and\
+    if is_last_one and values_before+k>1 and\
           values_before + k-1 <= len(positional_matrix[current_class-1]) :
         index_k_1 = positional_matrix[current_class-1][values_before+k-1-1]   
-        res2, is_valid2 = calc(A,matrices,perm[1:],index_k_1,k)
+        res2, is_valid2 = calc(A,matrices,perm[1:],index_k_1,k, is_last_one)
 
 
     if is_valid1 and is_valid2:
@@ -72,21 +60,33 @@ def calc(A,matrices,perm,init_pos,k):
 
 def solution( A: list[int], class_count=3):
     
+    better_solution = 0
     matrices= get_matrices(A,class_count)
-
+    #bottom,top  = 1,(len(A) // class_count +1)
     bottom,top  = 1,min(matrices[1][len(A)-1])+2
-    middle= (bottom+top) // 2
 
     perms= list(permutations(class_count))
-    while bottom<top:
+    while bottom<=top:
         middle= (bottom+top) // 2
         is_someone_valid = False
         new_perms = []
 
         for perm in perms:
-            if exist_solution(A,matrices,perm,middle):
+            if bottom!=top:
+                sol,was_valid=calc(A,matrices,perm,0,middle, False )
+            else:
+                # si ya es la ultima k, la respuesta debe estar ahi
+                sol=max(
+                    calc(A,matrices,perm,0,middle+1, True )[0],
+                    calc(A,matrices,perm,0,middle, True )[0]
+                )
+                was_valid=True
+
+
+            is_someone_valid |=  was_valid
+            better_solution = max(sol,better_solution) if was_valid else better_solution
+            if was_valid:
                 new_perms.append(perm)
-                is_someone_valid = True
 
         if is_someone_valid:
             bottom = middle+1
@@ -96,22 +96,7 @@ def solution( A: list[int], class_count=3):
             bottom =bottom 
             top =middle-1
     
-
-    best_solution = 0
-
-    for perm in perms:
-        first=calc(A,matrices,perm,0,bottom+1)[0]
-        second=calc(A,matrices,perm,0,bottom)[0]
-        best_solution= max(
-            first,
-            second,
-            best_solution
-        )
-
-    return best_solution
-
-
-     
+    return better_solution
 
 
 if __name__ =='__main__':
