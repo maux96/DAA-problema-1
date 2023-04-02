@@ -118,7 +118,7 @@ Con todo lo que tenemos hasta ahora podemos decir que:
 
 Entonces si encuentro solución para $K$ me interesa preguntar por un $K_0$ mayor dado que ahi puede estar mi solución general, pero si no existe entonces no hay $K_0$ mayor donde se encuentre nuestra solución general por lo que esa solución estara por debajo de $K$. Esto se puede ver entonces como una busqueda binaria donde mi predicado es (existe solución para $K$ exacto), lo cual es exactamente el output de la __Función 1__.
 
-Demostremos ahora que el $K máximo que puede cumplir con las restricciones es $K = \frac{|A|}{8}$:
+Demostremos ahora que el $K$ máximo que puede cumplir con las restricciones es $K = \frac{|A|}{8}$:
 
 Supongamos que exista una subsecuencia que posea una clase con cardinalidad mayor a $\frac{|A|}{8}$, sea esa clase c1, y que cumple con las restricciones de cardinalidad del problema, entonces existe al menos una clase con cardinalidad menor que $\frac{|A|}{8}$, porque de no ser asi entonces todas tienen cardinalidad mayor o igual lo cual implica que la subsecuencia tendra como minimo $7*\frac{|A|}{8} + \frac{|A|}{8} + 1$, dado que hay una clase con cardinalidad $\ge \frac{|A|}{8}+1$, luego no puede ser subsecuencia, luego existe esta clase con cardinalidad menor que  y la diferencia de la misma con la que es mayor a $\frac{|A|}{8}$, es mayor que 1, luego no cumple las restricciones, luego queda demostrado lo que se planteo. Dado que la division entre 8 no debe ser exacta, trabajamos sin perder generacidad con un valor máximo para K mayor que el techo de $\frac{|A|}{8}$, luego nuestro mayor K para el cual trabajamos sera:
 

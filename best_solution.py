@@ -3,6 +3,7 @@ import itertools
 def permutations(class_count = 3):
     return itertools.permutations([ i for i in range(1,class_count+1)])
 
+# precalculo 1 y 2
 def get_matrices(A: list[int], class_count):
     mat: list[list[int]] = [[] for _ in range(class_count)] 
     quantity_mat = []
