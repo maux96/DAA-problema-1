@@ -12,21 +12,6 @@ def verify(A: list[int], classes ):
     # lo sumo, entonces es verdadero
     return max(F) - min(F) <= 1
 
-#O(n!)
-def _solution_old(A: list[int],k: int,current_sol: list[int],classes: int):
-
-    max_length = 0 
-
-    for i in range(k,len(A)):
-        current_sol.append(A[i])
-        max_length = max(_solution(A,i+1,current_sol,classes),max_length)
-        current_sol.pop()
-
-    if verify(current_sol, classes):
-        max_length = max(len(current_sol),max_length)
-
-    return max_length 
-
 #O(2^n)
 def _solution(A: list[int],k: int, posible_solution: list[int], classes: int):
     if k == len(A):
@@ -42,11 +27,6 @@ def _solution(A: list[int],k: int, posible_solution: list[int], classes: int):
 
 def solution(A, classes):
     return _solution(A, 0, [], classes) 
-
-    
-
-def solution_old(A: list[int],CLASSES=3) -> int:
-    return _solution_old(A, 0,[], CLASSES ) 
 
 
 if __name__ == '__main__':

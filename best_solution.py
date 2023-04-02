@@ -19,6 +19,7 @@ def get_matrices(A: list[int], class_count):
 
     return mat, quantity_mat
 
+#funcion 1
 def exist_solution(A, matrices, order,k):
     positional_matrix, quantity_matrix = matrices
 
@@ -33,6 +34,7 @@ def exist_solution(A, matrices, order,k):
 
     return True
 
+# funcion 2
 def calc(A,matrices,perm,init_pos,k):
     positional_matrix, quantity_matrix = matrices
 
@@ -70,7 +72,7 @@ def calc(A,matrices,perm,init_pos,k):
     return 0, False 
 
 
-def solution( A: list[int], class_count=3):
+def solution( A: list[int], class_count):
     
     matrices= get_matrices(A,class_count)
 
@@ -119,18 +121,10 @@ if __name__ =='__main__':
 
 
     A = tester.gen_random_case(10_000_000,8) 
-   # with open('raulito.txt','w') as fd:
-   #     fd.write(",".join(map(lambda x: str(x-1),A)))
     start_time = time.time()
 
     sol = solution(A,8)
     print("solution",sol)
     current_time = time.time() - start_time
     print(f"time:{current_time:.5f}")
-        
-   #    fd.write(f'\nsolution:{sol}')
-   #    fd.write(f'\ntime:{current_time}')
-   #    fd.write(f'\nlast_k:{last_k}')
-
-    #print(get_position_matrix(A,4))
 

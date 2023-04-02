@@ -1,7 +1,7 @@
 import colorama
 
 from tester import gen_cases
-import naive_solution, polynomial_solution, polynomial_memo_solution,best_solution 
+import exponential_solution, best_solution 
 
 import time
 
@@ -39,8 +39,7 @@ if __name__ == '__main__':
     SIZE = 16 
 
     compare_and_print(
-        naive_solution.solution,
-        #polynomial_memo_solution.solution,
+        exponential_solution.solution,
         best_solution.solution,
         cases=TOTAL_CASES,
         classes=CLASSES,#i,
