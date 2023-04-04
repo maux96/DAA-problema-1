@@ -40,9 +40,9 @@ Hasta el índice i, cuántas repeticiones de c2 hay? sea la respuesta a ello: x.
 Con estos datos nuestra próxima pregunta será: dónde se encuentra el $(K+x)$-ésimo elemento de la clase c2?
 Si existe nos movemos al mismo y repetimos el proceso hasta c8. Si todos existen entonces existe una subsecuencia que cumple lo que estamos buscando y la salida será True, en caso que no exista será False porque no existe cadena que cumpla con las condiciones dadas(orden de clases, cardinalidad $K$).
 
-Nótese que preguntar por el $(K+x)$-ésimo elemento se puede ver como preguntar: desde el índice donde me encuetro hasta que índice debo moverme para tener $K$ elementos de Ci, dado que x es la cantidad de elementos de ci hasta el índice actual, y me interesa avanzar k repeticiones de ci, luego en la posición que aparece dicho elemento habra entonces k repeticiones de ci desde el índice actual hasta el cual me moveré.
+Nótese que preguntar por el $(K+x)$-ésimo elemento se puede ver como preguntar: desde el índice donde me encuetro hasta qué índice debo moverme para tener $K$ elementos de Ci, dado que x es la cantidad de elementos de ci hasta el índice actual, y me interesa avanzar k repeticiones de ci, luego en la posición que aparece dicho elemento habrá entonces k repeticiones de ci desde el índice actual hasta el cual me moveré.
 
-__Complejidad__: El algoritmo realiza 8 iteraciones, que va de una clase a otra, es entonce O(1), pero lo veremos como 8, dado que para calcular cadenas que cumplen que la cardinalidad de cada clase es ($K$ o $K-1$) tambien será O(1) pero en la práctica será más costoso(mayor constante)
+__Complejidad__: El algoritmo realiza 8 iteraciones, que va de una clase a otra, es entonces O(1), pero lo veremos como 8, dado que para calcular cadenas que cumplen que la cardinalidad de cada clase es ($K$ o $K-1$) tambien será O(1) pero en la práctica será más costoso(mayor constante)
 
 
 ### Función 2:
@@ -51,11 +51,11 @@ __input__: int $K, cadena $A$, orden de Clases.
 
 __output__: int: cardinalidad de la subsecuencia donde cada clase tiene cardinalidad k o k-1.
 
-Análogo al algoritmo para calcular cadenas unicamente de tamano K, el procedimiento es el mismo, solo que en este caso tenemos por cada clase dos opciones, que la cardinalidad sea K o que sea K-1, por lo que se tendran que probar todas las premutaciones para ello sigueindo la misma idea del algoritmo, pero ahora se pregunta en cada caso no solo por la posición (k+x)-ésima, sino tambien por otra posición (k+y)-ésima dado que existen nos interesan dos posibilidades: o la clase ci tiene cardinalidad k, o tiene cardinalidad k-1.
+Análogo al algoritmo para calcular cadenas unicamente de tamaño K, el procedimiento es el mismo, solo que en este caso tenemos por cada clase dos opciones, que la cardinalidad sea K o que sea K-1, por lo que se tendrán que probar todas las premutaciones para ello sigueindo la misma idea del algoritmo, pero ahora se pregunta en cada caso no solo por la posición (k+x)-ésima, sino también por otra posición (k+y)-ésima dado que nos interesan dos posibilidades: o la clase ci tiene cardinalidad k, o tiene cardinalidad k-1.
 
-__Complejidad__ : en este caso al existir dos posibilidades por cada clase, será $2 * 2 * 2 * $ ... = $2^8$ posibilidades. Nótese que ahora se realizan 256 operaciones, a diferencia de 8 que se realizan en el algoritmo anterior, luego la complejidad es O(1), pero en la práctica son 256 iteraciónes, lo cual es mas lento que el algoritmo anterior.
+__Complejidad__ : en este caso al existir dos posibilidades por cada clase, será $2 * 2 * 2 * $ ... = $2^8$ posibilidades. Nótese que ahora se realizan 256 operaciones, a diferencia de 8 que se realizan en el algoritmo anterior, luego la complejidad es O(1), pero en la práctica son 256 iteraciónes, lo cual es más lento que el algoritmo anterior.
 
-Nota: el costo de preguntar por estas posiciónes y valores es O(1) dado que esto estara precalculado, de no estarlo el costo seria n.
+Nota: el costo de preguntar por estas posiciónes y valores es O(1) dado que esto estará precalculado, de no estarlo el costo sería n.
 
 ### Precálculo 1
 
@@ -108,11 +108,11 @@ __Complejidad__: es de $O(|A|)$ ya que en un recorrido donde por cada elemento q
 
 Con todo lo que tenemos hasta ahora podemos decir que:
 
-- Si existe una subsecuencia de cardinalidad $K$(para todas sus clases), entonces puede existir una de cardinalidad ($K_0$ o $K_0-1$) para cada clase.
+- Si existe una subsecuencia de cardinalidad $K$(para todas sus clases), entonces puede existir una de cardinalidad ($K_0$ o $K_0-1$) para cada clase. Pero si no existe una cadena de cardinalidad $K$(para cada clase) entonces es seguro que no existe una de cardinalidad ($K_0$ o $K_0-1$) con $K_0>K$.
 
 - Si no existe subsecuencia de cardinalidad K(para todas sus clases) para una ordenación, entonces para esa ordenación no existen subsecuencias de cardinalidad $K_0$ o $K_0-1$ para cada clase con $K_0>K$.
 
-Entonces si encuentro solución para $K$ me interesa preguntar por un $K_0$ mayor dado que ahi puede estar mi solución general, pero si no existe entonces no hay $K_0$ mayor donde se encuentre nuestra solución general por lo que esa solución estara por debajo de $K$. Esto se puede ver entonces como una busqueda binaria donde mi predicado es (existe solución para $K$ exacto), lo cual es exactamente el output de la __Función 1__.
+Entonces si encuentro solución para $K$ me interesa preguntar por un $K_0$ mayor dado que ahi puede estar mi solución general, pero si no existe entonces no hay $K_0$ mayor donde se encuentre nuestra solución general por lo que esa solución estara por debajo de $K$. Esto se puede ver entonces como una búsqueda binaria donde mi predicado es (existe solución para $K$ exacto), lo cual es exactamente el output de la __Función 1__.
 
 Demostremos ahora que el $K$ máximo que puede cumplir con las restricciones es $K = \frac{|A|}{8}$:
 
