@@ -113,6 +113,7 @@ Con todo lo que tenemos hasta ahora podemos decir que:
 - Si no existe subsecuencia de cardinalidad K(para todas sus clases) para una ordenación, entonces para esa ordenación no existen subsecuencias de cardinalidad $K_0$ o $K_0-1$ para cada clase con $K_0>K$.
 
 Entonces si encuentro solución para $K$ me interesa preguntar por un $K_0$ mayor dado que ahi puede estar mi solución general, pero si no existe entonces no hay $K_0$ mayor donde se encuentre nuestra solución general por lo que esa solución estara por debajo de $K$. Esto se puede ver entonces como una búsqueda binaria donde mi predicado es (existe solución para $K$ exacto), lo cual es exactamente el output de la __Función 1__.
+__Nota:__ Para cada K se llama a la __Funcion1__ $o$ veces, donde $o$ es la cantidad de ordenaciones en las que puede aparecer una cadena válida para el $k$ de entrada, en un principio serán todas las permutaciones de 8 números (8!), En cada paso, cada vez que se encuebtre una cadena válida disminuyen las posibilidades por lo demostrado en __Demostración.2__, luego la cantidad de llamados será constante $<= 8!$
 
 Demostremos ahora que el $K$ máximo que puede cumplir con las restricciones es $K = \frac{|A|}{8}$:
 
