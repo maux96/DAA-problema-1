@@ -6,7 +6,7 @@
 
 ----
 ## Problema
-Dado un array A que contiene solo elementos de 8 tipos distintos, el problema consiste en hallar la subsecuencia máxima T, que cumpla con las restricciones:
+Dado un array $A$ que contiene solo elementos de 8 tipos distintos, el problema consiste en hallar la subsecuencia máxima T, que cumpla con las restricciones:
 -  $\forall C_i,C_j$ conjuntos de elementos de tipos específicos, se tiene que cumplir que $| |C_i| - |C_j| | \le 1 $. 
 - los elementos de un mismo conjunto tienen que estar consecutivos en T.
 
@@ -32,24 +32,24 @@ __input__: int K, cadena S, orden de Clases.
 __output__: bool => existe subsecuencia de A donde cada clase tiene exactamente cardinalidad K.
 
 
-La función recibe el orden en que deben aparecer las clases, sea el orden, sin perder genericidad: [c1,c2,c3,c4,c5,c6,c7,c8], con este dato podemos hacer la siguiente pregunta:
+La función recibe el orden en que deben aparecer las clases, sea el orden, sin perder genericidad: $[c1,c2,c3,c4,c5,c6,c7,c8]$, con este dato podemos hacer la siguiente pregunta:
 
-Dónde se encuentra el $K$-ésimo elemento de la clase c1?, si existe una posición que lo contiene nos movemos a esa posición, es decir desde cero a esa posición estamos teniendo en cuenta que nos quedaremos solo con los elementos c1. Ahora tenemos un index, una posición donde nos encontramos que es donde encontramos la $K$-ésima posición de c1, sea ese índice i. Nuestra siguiente pregunta será:
+Dónde se encuentra el $K$-ésimo elemento de la clase $c1$?, si existe una posición que lo contiene nos movemos a esa posición, es decir desde cero a esa posición estamos teniendo en cuenta que nos quedaremos solo con los elementos $c1$. Ahora tenemos un index, una posición donde nos encontramos que es donde encontramos la $K$-ésima posición de c1, sea ese índice i. Nuestra siguiente pregunta será:
 
-Hasta el índice i, cuántas repeticiones de c2 hay? sea la respuesta a ello: x.
-Con estos datos nuestra próxima pregunta será: dónde se encuentra el $(K+x)$-ésimo elemento de la clase c2?
+Hasta el índice i, cuántas repeticiones de $c2$ hay? sea la respuesta a ello: $x$.
+Con estos datos nuestra próxima pregunta será: dónde se encuentra el $(K+x)$-ésimo elemento de la clase $c2$?
 Si existe nos movemos al mismo y repetimos el proceso hasta c8. Si todos existen entonces existe una subsecuencia que cumple lo que estamos buscando y la salida será True, en caso que no exista será False porque no existe cadena que cumpla con las condiciones dadas(orden de clases, cardinalidad $K$).
 
-Nótese que preguntar por el $(K+x)$-ésimo elemento se puede ver como preguntar: desde el índice donde me encuetro hasta qué índice debo moverme para tener $K$ elementos de Ci, dado que x es la cantidad de elementos de ci hasta el índice actual, y me interesa avanzar k repeticiones de ci, luego en la posición que aparece dicho elemento habrá entonces k repeticiones de ci desde el índice actual hasta el cual me moveré.
+Nótese que preguntar por el $(K+x)$-ésimo elemento se puede ver como preguntar: desde el índice donde me encuetro hasta qué índice debo moverme para tener $K$ elementos de $ci$, dado que $x$ es la cantidad de elementos de $ci$ hasta el índice actual, y me interesa avanzar $k$ repeticiones de $ci$, luego en la posición que aparece dicho elemento habrá entonces $k$ repeticiones de $ci$ desde el índice actual hasta el cual me moveré.
 
 __Complejidad__: El algoritmo realiza 8 iteraciones, que va de una clase a otra, es entonces O(1), pero lo veremos como 8, dado que para calcular cadenas que cumplen que la cardinalidad de cada clase es ($K$ o $K-1$) tambien será O(1) pero en la práctica será más costoso(mayor constante)
 
 
 ### Función 2:
 
-__input__: int $K, cadena $A$, orden de Clases.
+__input__: int $K$, cadena $A$, orden de Clases.
 
-__output__: int: cardinalidad de la subsecuencia donde cada clase tiene cardinalidad k o k-1.
+__output__: int: cardinalidad de la subsecuencia donde cada clase tiene cardinalidad $k$ o $k-1$.
 
 Análogo al algoritmo para calcular cadenas unicamente de tamaño K, el procedimiento es el mismo, solo que en este caso tenemos por cada clase dos opciones, que la cardinalidad sea K o que sea K-1, por lo que se tendrán que probar todas las premutaciones para ello sigueindo la misma idea del algoritmo, pero ahora se pregunta en cada caso no solo por la posición (k+x)-ésima, sino también por otra posición (k+y)-ésima dado que nos interesan dos posibilidades: o la clase ci tiene cardinalidad k, o tiene cardinalidad k-1.
 
@@ -94,7 +94,7 @@ __Complejidad__: es de $O(|A|)$ ya que en un recorrido donde por cada elemento q
 
     [existe subsecuencia de cardinalidad $K_0$ o $K_0-1$ para cada clase en $A$, $K_0 > K$] 
     $\Rightarrow$
-    [existe subsecuencia de cardinalidad K (para cada clase) de A]
+    [existe subsecuencia de cardinalidad $K$ (para cada clase) de $A$]
 
     Si esta implicación se cumple entonces se cumple la que queremos demostrar.
 
